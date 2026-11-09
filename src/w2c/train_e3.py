@@ -270,6 +270,25 @@ def run(cfg: dict, backbone_key: str, checkpoint: str, out: str, device: str) ->
     Xv, yv = feats["val"]["X"], feats["val"]["y"]
     Xte, yte = feats["test"]["X"], feats["test"]["y"]
 
+    # Optional VIB-specific validation split carved from the training pool.
+    # This avoids selecting the VIB on the same validation split that selected
+    # the E2 checkpoint.  Test data are never touched.
+    vib_val_fraction = float(cfg.get("vib_val_fraction", 0.0))
+    if 0.0 < vib_val_fraction < 1.0:
+        split_rng = np.random.RandomState(int(cfg.get("vib_split_seed", 0)))
+        val_parts = []
+        train_parts = []
+        for label in np.unique(ytr):
+            idx = np.flatnonzero(ytr == label)
+            split_rng.shuffle(idx)
+            n_val = max(1, int(round(vib_val_fraction * len(idx))))
+            val_parts.append(idx[:n_val])
+            train_parts.append(idx[n_val:])
+        vib_val_idx = np.sort(np.concatenate(val_parts))
+        vib_train_idx = np.sort(np.concatenate(train_parts))
+        Xv, yv = Xtr[vib_val_idx], ytr[vib_val_idx]
+        Xtr, ytr = Xtr[vib_train_idx], ytr[vib_train_idx]
+
     # Train-only feature scaling.  "global" removes only the overall scale
     # (safe for a linear readout); "per_dim" z-scores each feature and is kept
     # as an ablation because it can amplify low-variance noise dimensions.

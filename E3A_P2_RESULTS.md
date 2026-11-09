@@ -1,5 +1,7 @@
 # E3-A P2 — corrected 68M BoolQ rate–distortion run
 
+> **Final report:** `E3A_FINAL_REPORT.md` (includes ablations, robustness, and figures).
+
 Run: `runs/e3a_boolq_p2/{encoder,decoder}/s{0..4}`  
 Config: `configs/e3a_boolq_p2.json`  
 Analysis: `runs/e3a_boolq_p2/analysis/`  
