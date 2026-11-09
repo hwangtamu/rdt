@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">E2: readout at 100% BoolQ, 68M</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">0.67</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">0.73</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">0.79</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">0.85</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">0.91</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">0.97</text>
+<line x1="90.00" y1="69.35" x2="865.00" y2="69.35" stroke="#666666" stroke-width="1" stroke-dasharray="4,4"/>
+<rect x="131.33" y="379.10" width="87.83" height="105.90" fill="#1f5fbf" stroke="none" stroke-width="1"/>
+<line x1="175.25" y1="466.49" x2="175.25" y2="291.71" stroke="#222" stroke-width="1.3"/>
+<line x1="171.25" y1="466.49" x2="179.25" y2="466.49" stroke="#222" stroke-width="1.3"/>
+<line x1="171.25" y1="291.71" x2="179.25" y2="291.71" stroke="#222" stroke-width="1.3"/>
+<rect x="219.17" y="325.60" width="87.83" height="159.40" fill="#c23b22" stroke="none" stroke-width="1"/>
+<line x1="263.08" y1="350.13" x2="263.08" y2="301.07" stroke="#222" stroke-width="1.3"/>
+<line x1="259.08" y1="350.13" x2="267.08" y2="350.13" stroke="#222" stroke-width="1.3"/>
+<line x1="259.08" y1="301.07" x2="267.08" y2="301.07" stroke="#222" stroke-width="1.3"/>
+<text x="219.17" y="476.39" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#222" font-weight="normal">last-L19</text>
+<rect x="389.67" y="329.66" width="87.83" height="155.34" fill="#1f5fbf" stroke="none" stroke-width="1"/>
+<line x1="433.58" y1="379.71" x2="433.58" y2="279.62" stroke="#222" stroke-width="1.3"/>
+<line x1="429.58" y1="379.71" x2="437.58" y2="379.71" stroke="#222" stroke-width="1.3"/>
+<line x1="429.58" y1="279.62" x2="437.58" y2="279.62" stroke="#222" stroke-width="1.3"/>
+<rect x="477.50" y="245.99" width="87.83" height="239.01" fill="#c23b22" stroke="none" stroke-width="1"/>
+<line x1="521.42" y1="302.71" x2="521.42" y2="189.26" stroke="#222" stroke-width="1.3"/>
+<line x1="517.42" y1="302.71" x2="525.42" y2="302.71" stroke="#222" stroke-width="1.3"/>
+<line x1="517.42" y1="189.26" x2="525.42" y2="189.26" stroke="#222" stroke-width="1.3"/>
+<text x="477.50" y="476.39" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#222" font-weight="normal">attn-L12</text>
+<rect x="648.00" y="380.26" width="87.83" height="104.74" fill="#1f5fbf" stroke="none" stroke-width="1"/>
+<line x1="691.92" y1="470.65" x2="691.92" y2="289.88" stroke="#222" stroke-width="1.3"/>
+<line x1="687.92" y1="470.65" x2="695.92" y2="470.65" stroke="#222" stroke-width="1.3"/>
+<line x1="687.92" y1="289.88" x2="695.92" y2="289.88" stroke="#222" stroke-width="1.3"/>
+<rect x="735.83" y="239.21" width="87.83" height="245.79" fill="#c23b22" stroke="none" stroke-width="1"/>
+<line x1="779.75" y1="279.90" x2="779.75" y2="198.52" stroke="#222" stroke-width="1.3"/>
+<line x1="775.75" y1="279.90" x2="783.75" y2="279.90" stroke="#222" stroke-width="1.3"/>
+<line x1="775.75" y1="198.52" x2="783.75" y2="198.52" stroke="#222" stroke-width="1.3"/>
+<text x="735.83" y="476.39" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#222" font-weight="normal">attn-L18</text>
+<line x1="150" y1="88" x2="178" y2="88" stroke="#1f5fbf" stroke-width="2.5"/>
+<rect x="160.5" y="84.5" width="7" height="7" fill="#1f5fbf"/>
+<text x="186" y="92" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder</text>
+<line x1="150" y1="109" x2="178" y2="109" stroke="#c23b22" stroke-width="2.5"/>
+<rect x="160.5" y="105.5" width="7" height="7" fill="#c23b22"/>
+<text x="186" y="113" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder</text>
+<text x="839.17" y="63.61" font-family="sans-serif" font-size="11" text-anchor="end" fill="#666666" font-weight="normal">label prior</text>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">readout</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">test CE (bits)</text>
+</svg>

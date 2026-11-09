@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">E2: data scaling, BoolQ 68M</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="126.90" y1="485" x2="126.90" y2="491" stroke="#333"/>
+<text x="126.90" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">5</text>
+<line x1="163.81" y1="485" x2="163.81" y2="491" stroke="#333"/>
+<text x="163.81" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">10</text>
+<line x1="274.52" y1="485" x2="274.52" y2="491" stroke="#333"/>
+<text x="274.52" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">25</text>
+<line x1="459.05" y1="485" x2="459.05" y2="491" stroke="#333"/>
+<text x="459.05" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">50</text>
+<line x1="828.10" y1="485" x2="828.10" y2="491" stroke="#333"/>
+<text x="828.10" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">100</text>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">0.67</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">0.74</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">0.81</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">0.87</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">0.94</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">1.01</text>
+<line x1="90.00" y1="122.26" x2="865.00" y2="122.26" stroke="#666666" stroke-width="1" stroke-dasharray="4,4"/>
+<polyline points="126.90,98.82 163.81,104.23 274.52,154.22 459.05,267.59 828.10,395.31" fill="none" stroke="#1f5fbf" stroke-width="2"/>
+<line x1="126.90" y1="128.50" x2="126.90" y2="69.14" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="122.90" y1="128.50" x2="130.90" y2="128.50" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="122.90" y1="69.14" x2="130.90" y2="69.14" stroke="#1f5fbf" stroke-width="1.5"/>
+<circle cx="126.90" cy="98.82" r="4" fill="#1f5fbf"/>
+<line x1="163.81" y1="140.81" x2="163.81" y2="67.65" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="159.81" y1="140.81" x2="167.81" y2="140.81" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="159.81" y1="67.65" x2="167.81" y2="67.65" stroke="#1f5fbf" stroke-width="1.5"/>
+<circle cx="163.81" cy="104.23" r="4" fill="#1f5fbf"/>
+<line x1="274.52" y1="173.49" x2="274.52" y2="134.96" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="270.52" y1="173.49" x2="278.52" y2="173.49" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="270.52" y1="134.96" x2="278.52" y2="134.96" stroke="#1f5fbf" stroke-width="1.5"/>
+<circle cx="274.52" cy="154.22" r="4" fill="#1f5fbf"/>
+<line x1="459.05" y1="326.83" x2="459.05" y2="208.35" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="455.05" y1="326.83" x2="463.05" y2="326.83" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="455.05" y1="208.35" x2="463.05" y2="208.35" stroke="#1f5fbf" stroke-width="1.5"/>
+<circle cx="459.05" cy="267.59" r="4" fill="#1f5fbf"/>
+<line x1="828.10" y1="472.35" x2="828.10" y2="318.28" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="824.10" y1="472.35" x2="832.10" y2="472.35" stroke="#1f5fbf" stroke-width="1.5"/>
+<line x1="824.10" y1="318.28" x2="832.10" y2="318.28" stroke="#1f5fbf" stroke-width="1.5"/>
+<circle cx="828.10" cy="395.31" r="4" fill="#1f5fbf"/>
+<polyline points="126.90,126.41 163.81,131.37 274.52,189.23 459.05,275.06 828.10,348.15" fill="none" stroke="#c23b22" stroke-width="2"/>
+<line x1="126.90" y1="132.86" x2="126.90" y2="119.96" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="122.90" y1="132.86" x2="130.90" y2="132.86" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="122.90" y1="119.96" x2="130.90" y2="119.96" stroke="#c23b22" stroke-width="1.5"/>
+<circle cx="126.90" cy="126.41" r="4" fill="#c23b22"/>
+<line x1="163.81" y1="149.69" x2="163.81" y2="113.05" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="159.81" y1="149.69" x2="167.81" y2="149.69" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="159.81" y1="113.05" x2="167.81" y2="113.05" stroke="#c23b22" stroke-width="1.5"/>
+<circle cx="163.81" cy="131.37" r="4" fill="#c23b22"/>
+<line x1="274.52" y1="223.57" x2="274.52" y2="154.89" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="270.52" y1="223.57" x2="278.52" y2="223.57" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="270.52" y1="154.89" x2="278.52" y2="154.89" stroke="#c23b22" stroke-width="1.5"/>
+<circle cx="274.52" cy="189.23" r="4" fill="#c23b22"/>
+<line x1="459.05" y1="305.46" x2="459.05" y2="244.65" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="455.05" y1="305.46" x2="463.05" y2="305.46" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="455.05" y1="244.65" x2="463.05" y2="244.65" stroke="#c23b22" stroke-width="1.5"/>
+<circle cx="459.05" cy="275.06" r="4" fill="#c23b22"/>
+<line x1="828.10" y1="369.77" x2="828.10" y2="326.53" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="824.10" y1="369.77" x2="832.10" y2="369.77" stroke="#c23b22" stroke-width="1.5"/>
+<line x1="824.10" y1="326.53" x2="832.10" y2="326.53" stroke="#c23b22" stroke-width="1.5"/>
+<circle cx="828.10" cy="348.15" r="4" fill="#c23b22"/>
+<line x1="150" y1="88" x2="178" y2="88" stroke="#1f5fbf" stroke-width="2.5"/>
+<circle cx="164" cy="88" r="3.5" fill="#1f5fbf"/>
+<text x="186" y="92" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder</text>
+<line x1="150" y1="109" x2="178" y2="109" stroke="#c23b22" stroke-width="2.5"/>
+<circle cx="164" cy="109" r="3.5" fill="#c23b22"/>
+<text x="186" y="113" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder</text>
+<text x="850.24" y="117.20" font-family="sans-serif" font-size="11" text-anchor="end" fill="#666666" font-weight="normal">label prior</text>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">training fraction (%)</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">test CE (bits)</text>
+</svg>

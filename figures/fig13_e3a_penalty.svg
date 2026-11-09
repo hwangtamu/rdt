@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">E3-A: compression-penalty delta</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="178.07" y1="485" x2="178.07" y2="491" stroke="#333"/>
+<text x="178.07" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">1</text>
+<line x1="266.14" y1="485" x2="266.14" y2="491" stroke="#333"/>
+<text x="266.14" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">2</text>
+<line x1="354.20" y1="485" x2="354.20" y2="491" stroke="#333"/>
+<text x="354.20" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">3</text>
+<line x1="442.27" y1="485" x2="442.27" y2="491" stroke="#333"/>
+<text x="442.27" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">4</text>
+<line x1="530.34" y1="485" x2="530.34" y2="491" stroke="#333"/>
+<text x="530.34" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">5</text>
+<line x1="618.41" y1="485" x2="618.41" y2="491" stroke="#333"/>
+<text x="618.41" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">6</text>
+<line x1="794.55" y1="485" x2="794.55" y2="491" stroke="#333"/>
+<text x="794.55" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">8</text>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">-0.06</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">-0.03</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">-0.01</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">0.02</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">0.05</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">0.08</text>
+<line x1="90.00" y1="297.15" x2="865.00" y2="297.15" stroke="#666666" stroke-width="1" stroke-dasharray="4,4"/>
+<polyline points="178.07,255.18 222.10,272.52 266.14,290.26 310.17,300.43 354.20,304.44 398.24,310.78 442.27,307.17 486.31,299.44 530.34,289.90 618.41,269.74 794.55,214.94" fill="none" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="178.07" y1="423.57" x2="178.07" y2="131.12" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="173.07" y1="423.57" x2="183.07" y2="423.57" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="173.07" y1="131.12" x2="183.07" y2="131.12" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="178.07" cy="255.18" r="4" fill="#2b7a4b"/>
+<line x1="222.10" y1="408.35" x2="222.10" y2="169.82" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="217.10" y1="408.35" x2="227.10" y2="408.35" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="217.10" y1="169.82" x2="227.10" y2="169.82" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="222.10" cy="272.52" r="4" fill="#2b7a4b"/>
+<line x1="266.14" y1="398.75" x2="266.14" y2="205.81" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="261.14" y1="398.75" x2="271.14" y2="398.75" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="261.14" y1="205.81" x2="271.14" y2="205.81" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="266.14" cy="290.26" r="4" fill="#2b7a4b"/>
+<line x1="310.17" y1="377.50" x2="310.17" y2="221.93" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="305.17" y1="377.50" x2="315.17" y2="377.50" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="305.17" y1="221.93" x2="315.17" y2="221.93" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="310.17" cy="300.43" r="4" fill="#2b7a4b"/>
+<line x1="354.20" y1="374.58" x2="354.20" y2="238.68" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="349.20" y1="374.58" x2="359.20" y2="374.58" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="349.20" y1="238.68" x2="359.20" y2="238.68" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="354.20" cy="304.44" r="4" fill="#2b7a4b"/>
+<line x1="398.24" y1="371.85" x2="398.24" y2="251.99" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="393.24" y1="371.85" x2="403.24" y2="371.85" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="393.24" y1="251.99" x2="403.24" y2="251.99" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="398.24" cy="310.78" r="4" fill="#2b7a4b"/>
+<line x1="442.27" y1="368.89" x2="442.27" y2="246.40" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="437.27" y1="368.89" x2="447.27" y2="368.89" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="437.27" y1="246.40" x2="447.27" y2="246.40" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="442.27" cy="307.17" r="4" fill="#2b7a4b"/>
+<line x1="486.31" y1="368.33" x2="486.31" y2="237.09" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="481.31" y1="368.33" x2="491.31" y2="368.33" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="481.31" y1="237.09" x2="491.31" y2="237.09" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="486.31" cy="299.44" r="4" fill="#2b7a4b"/>
+<line x1="530.34" y1="364.19" x2="530.34" y2="221.74" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="525.34" y1="364.19" x2="535.34" y2="364.19" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="525.34" y1="221.74" x2="535.34" y2="221.74" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="530.34" cy="289.90" r="4" fill="#2b7a4b"/>
+<line x1="618.41" y1="342.72" x2="618.41" y2="191.56" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="613.41" y1="342.72" x2="623.41" y2="342.72" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="613.41" y1="191.56" x2="623.41" y2="191.56" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="618.41" cy="269.74" r="4" fill="#2b7a4b"/>
+<line x1="794.55" y1="313.55" x2="794.55" y2="116.43" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="789.55" y1="313.55" x2="799.55" y2="313.55" stroke="#2b7a4b" stroke-width="2"/>
+<line x1="789.55" y1="116.43" x2="799.55" y2="116.43" stroke="#2b7a4b" stroke-width="2"/>
+<circle cx="794.55" cy="214.94" r="4" fill="#2b7a4b"/>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">validation KL rate (bits/example)</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">decoder penalty - encoder penalty</text>
+</svg>

@@ -4,7 +4,7 @@
 **Run:** `runs/e3a_boolq_p2/{encoder,decoder}/s{0..4}`  
 **Config:** `configs/e3a_boolq_p2.json`  
 **Analysis:** `runs/e3a_boolq_p2/analysis/`  
-**Figures:** `figures/e3a_absolute_rd.svg`, `figures/e3a_delta.svg`, `figures/e3a_penalty.svg`
+**Figures:** `figures/fig11_e3a_absolute_rd.svg`, `figures/fig12_e3a_delta.svg`, `figures/fig13_e3a_penalty.svg`
 
 ## Executive summary
 
@@ -206,9 +206,10 @@ same decision distortion” is not supported by the primary latent-32 analysis.
 - `runs/e3a_boolq_p2/analysis/robustness.md`
 - `runs/e3a_boolq_p2/analysis/curves.csv`
 - Ablation analyses under `runs/e3a_boolq_p2_{lat128,noscale,perdim,seeds5}/analysis/`
-- `figures/e3a_absolute_rd.svg`
-- `figures/e3a_delta.svg`
-- `figures/e3a_penalty.svg`
+- `figures/fig11_e3a_absolute_rd.svg`
+- `figures/fig12_e3a_delta.svg`
+- `figures/fig13_e3a_penalty.svg`
+- Cross-experiment narrative: `RDT_STORY.md`
 - Reproduce analysis:
   ```bash
   PYTHONPATH=src $VENV/bin/python -m w2c.compare_e3_p2 --run-root runs/e3a_boolq_p2

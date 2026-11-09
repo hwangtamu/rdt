@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">E1: frozen probe by layer, BoolQ 68M</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="109.38" y1="485" x2="109.38" y2="491" stroke="#333"/>
+<text x="109.38" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">0</text>
+<line x1="264.38" y1="485" x2="264.38" y2="491" stroke="#333"/>
+<text x="264.38" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">4</text>
+<line x1="419.38" y1="485" x2="419.38" y2="491" stroke="#333"/>
+<text x="419.38" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">8</text>
+<line x1="574.38" y1="485" x2="574.38" y2="491" stroke="#333"/>
+<text x="574.38" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">12</text>
+<line x1="729.38" y1="485" x2="729.38" y2="491" stroke="#333"/>
+<text x="729.38" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">16</text>
+<line x1="845.62" y1="485" x2="845.62" y2="491" stroke="#333"/>
+<text x="845.62" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">19</text>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">0.88</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">0.91</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">0.95</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">0.98</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">1.02</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">1.06</text>
+<line x1="109.38" y1="293.90" x2="845.62" y2="293.90" stroke="#666666" stroke-width="1" stroke-dasharray="4,4"/>
+<polyline points="109.38,293.89 148.12,368.12 186.88,339.55 225.62,350.49 264.38,375.91 303.12,357.40 341.88,357.78 380.62,369.50 419.38,384.58 458.12,385.33 496.88,398.55 535.62,378.53 574.38,381.20 613.12,369.26 651.88,366.92 690.62,362.06 729.38,362.06 768.12,351.80 806.88,357.96 845.62,357.39" fill="none" stroke="#1f5fbf" stroke-width="2"/>
+<circle cx="109.38" cy="293.89" r="4" fill="#1f5fbf"/>
+<circle cx="148.12" cy="368.12" r="4" fill="#1f5fbf"/>
+<circle cx="186.88" cy="339.55" r="4" fill="#1f5fbf"/>
+<circle cx="225.62" cy="350.49" r="4" fill="#1f5fbf"/>
+<circle cx="264.38" cy="375.91" r="4" fill="#1f5fbf"/>
+<circle cx="303.12" cy="357.40" r="4" fill="#1f5fbf"/>
+<circle cx="341.88" cy="357.78" r="4" fill="#1f5fbf"/>
+<circle cx="380.62" cy="369.50" r="4" fill="#1f5fbf"/>
+<circle cx="419.38" cy="384.58" r="4" fill="#1f5fbf"/>
+<circle cx="458.12" cy="385.33" r="4" fill="#1f5fbf"/>
+<circle cx="496.88" cy="398.55" r="4" fill="#1f5fbf"/>
+<circle cx="535.62" cy="378.53" r="4" fill="#1f5fbf"/>
+<circle cx="574.38" cy="381.20" r="4" fill="#1f5fbf"/>
+<circle cx="613.12" cy="369.26" r="4" fill="#1f5fbf"/>
+<circle cx="651.88" cy="366.92" r="4" fill="#1f5fbf"/>
+<circle cx="690.62" cy="362.06" r="4" fill="#1f5fbf"/>
+<circle cx="729.38" cy="362.06" r="4" fill="#1f5fbf"/>
+<circle cx="768.12" cy="351.80" r="4" fill="#1f5fbf"/>
+<circle cx="806.88" cy="357.96" r="4" fill="#1f5fbf"/>
+<circle cx="845.62" cy="357.39" r="4" fill="#1f5fbf"/>
+<polyline points="109.38,293.90 148.12,372.83 186.88,365.61 225.62,382.69 264.38,413.75 303.12,389.60 341.88,400.78 380.62,386.64 419.38,390.36 458.12,400.76 496.88,410.71 535.62,402.76 574.38,411.81 613.12,402.07 651.88,397.31 690.62,394.47 729.38,392.08 768.12,403.66 806.88,412.29 845.62,417.40" fill="none" stroke="#1f5fbf" stroke-width="2" stroke-dasharray="7,5"/>
+<rect x="105.38" y="289.90" width="8" height="8" fill="#1f5fbf"/>
+<rect x="144.12" y="368.83" width="8" height="8" fill="#1f5fbf"/>
+<rect x="182.88" y="361.61" width="8" height="8" fill="#1f5fbf"/>
+<rect x="221.62" y="378.69" width="8" height="8" fill="#1f5fbf"/>
+<rect x="260.38" y="409.75" width="8" height="8" fill="#1f5fbf"/>
+<rect x="299.12" y="385.60" width="8" height="8" fill="#1f5fbf"/>
+<rect x="337.88" y="396.78" width="8" height="8" fill="#1f5fbf"/>
+<rect x="376.62" y="382.64" width="8" height="8" fill="#1f5fbf"/>
+<rect x="415.38" y="386.36" width="8" height="8" fill="#1f5fbf"/>
+<rect x="454.12" y="396.76" width="8" height="8" fill="#1f5fbf"/>
+<rect x="492.88" y="406.71" width="8" height="8" fill="#1f5fbf"/>
+<rect x="531.62" y="398.76" width="8" height="8" fill="#1f5fbf"/>
+<rect x="570.38" y="407.81" width="8" height="8" fill="#1f5fbf"/>
+<rect x="609.12" y="398.07" width="8" height="8" fill="#1f5fbf"/>
+<rect x="647.88" y="393.31" width="8" height="8" fill="#1f5fbf"/>
+<rect x="686.62" y="390.47" width="8" height="8" fill="#1f5fbf"/>
+<rect x="725.38" y="388.08" width="8" height="8" fill="#1f5fbf"/>
+<rect x="764.12" y="399.66" width="8" height="8" fill="#1f5fbf"/>
+<rect x="802.88" y="408.29" width="8" height="8" fill="#1f5fbf"/>
+<rect x="841.62" y="413.40" width="8" height="8" fill="#1f5fbf"/>
+<polyline points="109.38,103.22 148.12,146.59 186.88,193.11 225.62,216.07 264.38,349.71 303.12,321.91 341.88,338.15 380.62,345.09 419.38,362.08 458.12,422.91 496.88,378.58 535.62,411.56 574.38,419.76 613.12,360.04 651.88,342.94 690.62,338.64 729.38,332.35 768.12,357.57 806.88,355.77 845.62,341.40" fill="none" stroke="#c23b22" stroke-width="2"/>
+<circle cx="109.38" cy="103.22" r="4" fill="#c23b22"/>
+<circle cx="148.12" cy="146.59" r="4" fill="#c23b22"/>
+<circle cx="186.88" cy="193.11" r="4" fill="#c23b22"/>
+<circle cx="225.62" cy="216.07" r="4" fill="#c23b22"/>
+<circle cx="264.38" cy="349.71" r="4" fill="#c23b22"/>
+<circle cx="303.12" cy="321.91" r="4" fill="#c23b22"/>
+<circle cx="341.88" cy="338.15" r="4" fill="#c23b22"/>
+<circle cx="380.62" cy="345.09" r="4" fill="#c23b22"/>
+<circle cx="419.38" cy="362.08" r="4" fill="#c23b22"/>
+<circle cx="458.12" cy="422.91" r="4" fill="#c23b22"/>
+<circle cx="496.88" cy="378.58" r="4" fill="#c23b22"/>
+<circle cx="535.62" cy="411.56" r="4" fill="#c23b22"/>
+<circle cx="574.38" cy="419.76" r="4" fill="#c23b22"/>
+<circle cx="613.12" cy="360.04" r="4" fill="#c23b22"/>
+<circle cx="651.88" cy="342.94" r="4" fill="#c23b22"/>
+<circle cx="690.62" cy="338.64" r="4" fill="#c23b22"/>
+<circle cx="729.38" cy="332.35" r="4" fill="#c23b22"/>
+<circle cx="768.12" cy="357.57" r="4" fill="#c23b22"/>
+<circle cx="806.88" cy="355.77" r="4" fill="#c23b22"/>
+<circle cx="845.62" cy="341.40" r="4" fill="#c23b22"/>
+<polyline points="109.38,188.49 148.12,269.84 186.88,247.85 225.62,323.46 264.38,358.40 303.12,371.11 341.88,361.16 380.62,380.49 419.38,398.08 458.12,436.78 496.88,381.26 535.62,393.80 574.38,398.88 613.12,376.71 651.88,375.32 690.62,389.44 729.38,407.27 768.12,395.10 806.88,408.36 845.62,387.23" fill="none" stroke="#c23b22" stroke-width="2" stroke-dasharray="7,5"/>
+<rect x="105.38" y="184.49" width="8" height="8" fill="#c23b22"/>
+<rect x="144.12" y="265.84" width="8" height="8" fill="#c23b22"/>
+<rect x="182.88" y="243.85" width="8" height="8" fill="#c23b22"/>
+<rect x="221.62" y="319.46" width="8" height="8" fill="#c23b22"/>
+<rect x="260.38" y="354.40" width="8" height="8" fill="#c23b22"/>
+<rect x="299.12" y="367.11" width="8" height="8" fill="#c23b22"/>
+<rect x="337.88" y="357.16" width="8" height="8" fill="#c23b22"/>
+<rect x="376.62" y="376.49" width="8" height="8" fill="#c23b22"/>
+<rect x="415.38" y="394.08" width="8" height="8" fill="#c23b22"/>
+<rect x="454.12" y="432.78" width="8" height="8" fill="#c23b22"/>
+<rect x="492.88" y="377.26" width="8" height="8" fill="#c23b22"/>
+<rect x="531.62" y="389.80" width="8" height="8" fill="#c23b22"/>
+<rect x="570.38" y="394.88" width="8" height="8" fill="#c23b22"/>
+<rect x="609.12" y="372.71" width="8" height="8" fill="#c23b22"/>
+<rect x="647.88" y="371.32" width="8" height="8" fill="#c23b22"/>
+<rect x="686.62" y="385.44" width="8" height="8" fill="#c23b22"/>
+<rect x="725.38" y="403.27" width="8" height="8" fill="#c23b22"/>
+<rect x="764.12" y="391.10" width="8" height="8" fill="#c23b22"/>
+<rect x="802.88" y="404.36" width="8" height="8" fill="#c23b22"/>
+<rect x="841.62" y="383.23" width="8" height="8" fill="#c23b22"/>
+<line x1="140" y1="85" x2="168" y2="85" stroke="#1f5fbf" stroke-width="2.5"/>
+<circle cx="154" cy="85" r="3.5" fill="#1f5fbf"/>
+<text x="176" y="89" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder linear</text>
+<line x1="140" y1="106" x2="168" y2="106" stroke="#1f5fbf" stroke-width="2.5" stroke-dasharray="7,5"/>
+<rect x="150.5" y="102.5" width="7" height="7" fill="#1f5fbf"/>
+<text x="176" y="110" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder MLP</text>
+<line x1="140" y1="127" x2="168" y2="127" stroke="#c23b22" stroke-width="2.5"/>
+<circle cx="154" cy="127" r="3.5" fill="#c23b22"/>
+<text x="176" y="131" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder linear</text>
+<line x1="140" y1="148" x2="168" y2="148" stroke="#c23b22" stroke-width="2.5" stroke-dasharray="7,5"/>
+<rect x="150.5" y="144.5" width="7" height="7" fill="#c23b22"/>
+<text x="176" y="152" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder MLP</text>
+<text x="826.25" y="284.25" font-family="sans-serif" font-size="11" text-anchor="end" fill="#666666" font-weight="normal">label prior</text>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">layer</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">test CE (bits)</text>
+</svg>

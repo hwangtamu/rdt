@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">E2: fine-tuning dynamics, 100% BoolQ</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90.00" y1="485" x2="90.00" y2="491" stroke="#333"/>
+<text x="90.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">0</text>
+<line x1="245.00" y1="485" x2="245.00" y2="491" stroke="#333"/>
+<text x="245.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">1</text>
+<line x1="400.00" y1="485" x2="400.00" y2="491" stroke="#333"/>
+<text x="400.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">2</text>
+<line x1="555.00" y1="485" x2="555.00" y2="491" stroke="#333"/>
+<text x="555.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">3</text>
+<line x1="710.00" y1="485" x2="710.00" y2="491" stroke="#333"/>
+<text x="710.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">4</text>
+<line x1="865.00" y1="485" x2="865.00" y2="491" stroke="#333"/>
+<text x="865.00" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">5</text>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">-0.01</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">0.53</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">1.07</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">1.61</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">2.15</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">2.69</text>
+<polyline points="90.00,299.89 245.00,362.84 400.00,417.96 555.00,457.43 710.00,474.95 865.00,481.81" fill="none" stroke="#1f5fbf" stroke-width="2" stroke-dasharray="6,4"/>
+<rect x="86.00" y="295.89" width="8" height="8" fill="#1f5fbf"/>
+<rect x="241.00" y="358.84" width="8" height="8" fill="#1f5fbf"/>
+<rect x="396.00" y="413.96" width="8" height="8" fill="#1f5fbf"/>
+<rect x="551.00" y="453.43" width="8" height="8" fill="#1f5fbf"/>
+<rect x="706.00" y="470.95" width="8" height="8" fill="#1f5fbf"/>
+<rect x="861.00" y="477.81" width="8" height="8" fill="#1f5fbf"/>
+<polyline points="90.00,342.59 245.00,358.89 400.00,343.66 555.00,187.17 710.00,82.09 865.00,58.19" fill="none" stroke="#1f5fbf" stroke-width="2"/>
+<circle cx="90.00" cy="342.59" r="4" fill="#1f5fbf"/>
+<circle cx="245.00" cy="358.89" r="4" fill="#1f5fbf"/>
+<circle cx="400.00" cy="343.66" r="4" fill="#1f5fbf"/>
+<circle cx="555.00" cy="187.17" r="4" fill="#1f5fbf"/>
+<circle cx="710.00" cy="82.09" r="4" fill="#1f5fbf"/>
+<circle cx="865.00" cy="58.19" r="4" fill="#1f5fbf"/>
+<polyline points="90.00,338.38 245.00,384.27 400.00,439.70 555.00,465.52 710.00,477.69" fill="none" stroke="#c23b22" stroke-width="2" stroke-dasharray="6,4"/>
+<rect x="86.00" y="334.38" width="8" height="8" fill="#c23b22"/>
+<rect x="241.00" y="380.27" width="8" height="8" fill="#c23b22"/>
+<rect x="396.00" y="435.70" width="8" height="8" fill="#c23b22"/>
+<rect x="551.00" y="461.52" width="8" height="8" fill="#c23b22"/>
+<rect x="706.00" y="473.69" width="8" height="8" fill="#c23b22"/>
+<polyline points="90.00,349.38 245.00,353.96 400.00,281.18 555.00,141.15 710.00,89.60" fill="none" stroke="#c23b22" stroke-width="2"/>
+<circle cx="90.00" cy="349.38" r="4" fill="#c23b22"/>
+<circle cx="245.00" cy="353.96" r="4" fill="#c23b22"/>
+<circle cx="400.00" cy="281.18" r="4" fill="#c23b22"/>
+<circle cx="555.00" cy="141.15" r="4" fill="#c23b22"/>
+<circle cx="710.00" cy="89.60" r="4" fill="#c23b22"/>
+<line x1="245.00" y1="485.00" x2="245.00" y2="55.00" stroke="#666666" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="257.40" y="67.75" font-family="sans-serif" font-size="11" text-anchor="start" fill="#666666" font-weight="normal">best validation region</text>
+<line x1="120" y1="80" x2="148" y2="80" stroke="#1f5fbf" stroke-width="2.5"/>
+<circle cx="134" cy="80" r="3.5" fill="#1f5fbf"/>
+<text x="156" y="84" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder val</text>
+<line x1="120" y1="101" x2="148" y2="101" stroke="#c23b22" stroke-width="2.5"/>
+<circle cx="134" cy="101" r="3.5" fill="#c23b22"/>
+<text x="156" y="105" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder val</text>
+<line x1="120" y1="122" x2="148" y2="122" stroke="#1f5fbf" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="130.5" y="118.5" width="7" height="7" fill="#1f5fbf"/>
+<text x="156" y="126" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder train</text>
+<line x1="120" y1="143" x2="148" y2="143" stroke="#c23b22" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="130.5" y="139.5" width="7" height="7" fill="#c23b22"/>
+<text x="156" y="147" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder train</text>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">epoch</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">CE (bits)</text>
+</svg>
