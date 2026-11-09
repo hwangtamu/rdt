@@ -2,5 +2,7 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-runs/
+runs/**
+!runs/**/
+!runs/**/*.md
 data/
