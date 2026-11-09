@@ -1,0 +1,75 @@
+{
+  "seed": 0,
+  "seeds": [0, 1],
+
+  "data": {
+    "raw": "data/dummy/raw.jsonl",
+    "train": null,
+    "val": null,
+    "test": null,
+    "label_field": "decision",
+    "id_field": "id",
+    "question_field": "question",
+    "tools_field": "tools",
+    "group_field": "group_id",
+    "val_fraction": 0.2,
+    "test_fraction": 0.2,
+    "max_examples": null
+  },
+
+  "template": {
+    "text": "Available Tools:\n{tool_definitions}\n\nUser Request:\n{question}\n\nDecision:",
+    "tool_format": "- {name}\n  description: {description}\n  parameters: {parameters}",
+    "empty_tools": "(none)"
+  },
+
+  "backbones": [
+    {"key": "encoder", "name": "dummy", "dtype": "float32"},
+    {"key": "decoder", "name": "dummy", "dtype": "float32"}
+  ],
+
+  "features": {
+    "batch_size": 64,
+    "max_length": 512,
+    "pooling": "last",
+    "layers": [0, 4, 8],
+    "device": "cpu",
+    "cache_dir": "runs/dummy/features",
+    "token_cache_dir": "runs/dummy/features_tokens",
+    "trust_remote_code": false
+  },
+
+  "probes": {
+    "kinds": ["linear", "mlp"],
+    "mlp_hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.01,
+    "weight_decay": 0.0,
+    "batch_size": 4096,
+    "max_epochs": 60,
+    "patience": 10,
+    "standardize": true
+  },
+
+  "e15": {
+    "readouts": ["last", "mean", "attn", "concat"],
+    "concat": {"pooling": "last", "layer_sets": [[0, 4, 8]]},
+    "attn": {
+      "layers": [0, 4, 8],
+      "device": "cpu",
+      "batch_size": 16,
+      "lr": 0.01,
+      "weight_decay": 0.0,
+      "max_epochs": 30,
+      "patience": 5
+    }
+  },
+
+  "eval": {
+    "bootstrap": 50,
+    "n_bins": 10,
+    "alpha": 0.05
+  },
+
+  "out": "runs/dummy/e15"
+}

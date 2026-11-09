@@ -1,0 +1,83 @@
+{
+  "seed": 0,
+  "seeds": [0, 1, 2],
+  "data": {
+    "train": "data/boolq_e0/train.jsonl",
+    "val": "data/boolq_e0/val.jsonl",
+    "test": "data/boolq_e0/test.jsonl",
+    "classes": ["a", "b"],
+    "label_mode": "index",
+    "label_field": "label",
+    "n_options_field": "n_options",
+    "prompt_field": "prompt",
+    "id_field": "id",
+    "question_field": "question",
+    "tools_field": "tools",
+    "group_field": "group_id",
+    "val_fraction": 0.0,
+    "test_fraction": 0.0,
+    "max_examples": null
+  },
+  "template": {
+    "text": "{question}",
+    "tool_format": "- {name}\n  description: {description}\n  parameters: {parameters}",
+    "empty_tools": "(none)"
+  },
+  "backbones": [
+    {
+      "key": "encoder",
+      "name": "jhu-clsp/ettin-encoder-150m",
+      "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-encoder-150m",
+      "dtype": "float16"
+    },
+    {
+      "key": "decoder",
+      "name": "jhu-clsp/ettin-decoder-150m",
+      "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-decoder-150m",
+      "dtype": "float16"
+    }
+  ],
+  "features": {
+    "batch_size": 16,
+    "max_length": 512,
+    "pooling": "last",
+    "layers": [0, 6, 11, 12, 17, 22],
+    "device": "cuda:2",
+    "cache_dir": "runs/features_boolq_e0",
+    "token_cache_dir": "runs/features_tokens_boolq_e0",
+    "trust_remote_code": false
+  },
+  "probes": {
+    "kinds": ["linear", "mlp"],
+    "mlp_hidden": 256,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 4096,
+    "max_epochs": 200,
+    "patience": 20,
+    "standardize": true
+  },
+  "eval": {
+    "bootstrap": 2000,
+    "n_bins": 10,
+    "alpha": 0.05
+  },
+  "e15": {
+    "readouts": ["last", "mean", "attn", "concat"],
+    "concat": {
+      "pooling": "last",
+      "layer_sets": [[6, 11, 12, 17, 22]]
+    },
+    "attn": {
+      "layers": [0, 6, 11, 12, 17, 22],
+      "device": "cuda:2",
+      "batch_size": 32,
+      "lr": 0.001,
+      "weight_decay": 0.01,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  "out": "runs/e15_boolq"
+}

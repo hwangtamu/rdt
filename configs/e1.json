@@ -1,0 +1,64 @@
+{
+  "seed": 0,
+  "seeds": [0, 1, 2],
+
+  "data": {
+    "raw": null,
+    "train": "data/splits/train.jsonl",
+    "val": "data/splits/val.jsonl",
+    "test": "data/splits/test.jsonl",
+    "label_field": "decision",
+    "id_field": "id",
+    "question_field": "question",
+    "tools_field": "tools",
+    "group_field": "group_id",
+    "val_fraction": 0.15,
+    "test_fraction": 0.15,
+    "max_examples": null
+  },
+
+  "template": {
+    "text": "Available Tools:\n{tool_definitions}\n\nUser Request:\n{question}\n\nDecision:",
+    "tool_format": "- {name}\n  description: {description}\n  parameters: {parameters}",
+    "empty_tools": "(none)"
+  },
+
+  "backbones": [
+    {"key": "encoder", "name": "jhu-clsp/ettin-encoder-150m",
+     "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-encoder-150m",
+     "dtype": "float16"},
+    {"key": "decoder", "name": "jhu-clsp/ettin-decoder-150m",
+     "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-decoder-150m",
+     "dtype": "float16"}
+  ],
+
+  "features": {
+    "batch_size": 8,
+    "max_length": 2048,
+    "pooling": "last",
+    "layers": null,
+    "device": "cuda:1",
+    "cache_dir": "runs/features",
+    "trust_remote_code": false
+  },
+
+  "probes": {
+    "kinds": ["linear", "mlp"],
+    "mlp_hidden": 256,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 4096,
+    "max_epochs": 200,
+    "patience": 20,
+    "standardize": true
+  },
+
+  "eval": {
+    "bootstrap": 2000,
+    "n_bins": 15,
+    "alpha": 0.05
+  },
+
+  "out": "runs/e1"
+}

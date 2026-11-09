@@ -1,0 +1,83 @@
+{
+  "data": {
+    "train": "data/boolq_e0/train.jsonl",
+    "val": "data/boolq_e0/val.jsonl",
+    "test": "data/boolq_e0/test.jsonl",
+    "classes": [
+      "a",
+      "b"
+    ],
+    "label_mode": "index",
+    "label_field": "label",
+    "n_options_field": "n_options",
+    "prompt_field": "prompt",
+    "id_field": "id",
+    "question_field": "question",
+    "tools_field": "tools",
+    "group_field": "group_id",
+    "val_fraction": 0.0,
+    "test_fraction": 0.0,
+    "max_examples": null
+  },
+  "max_length": 512,
+  "feature_batch_size": 32,
+  "feature_cache_dir": "runs/e3a_boolq/features",
+  "betas": [
+    0.05,
+    0.08,
+    0.1,
+    0.11,
+    0.12,
+    0.13,
+    0.14,
+    0.15,
+    0.2,
+    0.3,
+    0.5,
+    1.0,
+    10.0
+  ],
+  "vib_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "standardize": false,
+  "epochs": 250,
+  "patience": 20,
+  "batch_size": 20000,
+  "eval_batch_size": 2048,
+  "mc_train": 16,
+  "mc_eval": 64,
+  "lr": 0.001,
+  "weight_decay": 0.01,
+  "grad_clip": 1.0,
+  "latents": [
+    32
+  ],
+  "logvar_init": 0.0,
+  "logvar_init_by_beta": {
+    "0.05": 0.0,
+    "0.08": 0.0,
+    "0.1": 0.0,
+    "0.11": 0.0,
+    "0.12": 0.0,
+    "0.13": 0.0,
+    "0.14": 0.0,
+    "0.15": 0.0,
+    "0.2": 0.0,
+    "0.3": 0.0,
+    "0.5": 0.0,
+    "1.0": 0.0,
+    "10.0": 0.0
+  },
+  "warmstart_max_beta": -1.0,
+  "warmstart_epochs": 0,
+  "kl_warmup_epochs": 0,
+  "lr_by_beta": {
+    "1.0": 0.0005,
+    "10.0": 0.0001
+  }
+}

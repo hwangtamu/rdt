@@ -1,0 +1,75 @@
+{
+  "seed": 0,
+  "seeds": [0, 1, 2],
+  "data": {
+    "raw": "data/when2call_pref/raw.jsonl",
+    "test": "data/when2call_pref/test.jsonl",
+    "train": null,
+    "val": null,
+    "classes": ["tool_call", "request_for_info", "cannot_answer"],
+    "label_field": "decision",
+    "id_field": "id",
+    "question_field": "question",
+    "tools_field": "tools",
+    "group_field": "group_id",
+    "val_fraction": 0.15,
+    "test_fraction": 0.0,
+    "max_examples": null
+  },
+  "template": {
+    "text": "Available Tools:\n{tool_definitions}\n\nUser Request:\n{question}\n\nDecision:",
+    "tool_format": "- {name}\n  description: {description}\n  parameters: {parameters}",
+    "empty_tools": "(none)"
+  },
+  "backbones": [
+    {
+      "key": "encoder",
+      "name": "jhu-clsp/ettin-encoder-150m",
+      "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-encoder-150m",
+      "dtype": "float32"
+    },
+    {
+      "key": "decoder",
+      "name": "jhu-clsp/ettin-decoder-150m",
+      "path": "/mnt/local-disk/decision-models/tiny-decision-model/out/ettin-decoder-150m",
+      "dtype": "float32"
+    }
+  ],
+  "features": {
+    "batch_size": 8,
+    "max_length": 2048,
+    "pooling": "last",
+    "layers": [0, 6, 11, 12, 17, 22],
+    "device": "cuda:2",
+    "cache_dir": "runs/features_w2c_pref",
+    "trust_remote_code": false
+  },
+  "finetune": {
+    "device": "cuda:2",
+    "max_length": 2048,
+    "batch_size": 8,
+    "eval_batch_size": 16,
+    "grad_accum": 2,
+    "lr": 2e-5,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.06,
+    "dropout": 0.1,
+    "grad_clip": 1.0,
+    "patience": 3,
+    "max_epochs_by_fraction": {
+      "0.01": 40,
+      "0.05": 20,
+      "0.1": 15,
+      "0.25": 12,
+      "0.5": 8,
+      "1.0": 6
+    }
+  },
+  "fractions": [0.01, 0.05, 0.1, 0.25, 0.5, 1.0],
+  "eval": {
+    "bootstrap": 2000,
+    "n_bins": 15,
+    "alpha": 0.05
+  },
+  "out": "runs/e2_w2c_pref"
+}
