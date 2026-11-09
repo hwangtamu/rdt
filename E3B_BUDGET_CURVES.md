@@ -1,3 +1,10 @@
+> **Rejected as a rate–distortion result.** The continuous gate scales the
+> transmitted latent but reports `g * KL` rather than the KL of the transmitted
+> random variable, and its high-rate control uses a different pooling path.
+> Preserve these numbers only as debugging history. See
+> [`E3B_CORRECTED_SETUP.md`](E3B_CORRECTED_SETUP.md) for the replacement
+> protocol.
+
 # E3-B budgeted D(R) curves — pilot
 
 Hard per-example budget projection on sparse token gates. Total rate is capped

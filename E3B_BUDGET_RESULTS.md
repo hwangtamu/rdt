@@ -1,3 +1,7 @@
+> **Superseded by [`E3B_CORRECTED_SETUP.md`](E3B_CORRECTED_SETUP.md).** This
+> controller and its follow-up continuous-gate budget curves do not implement a
+> valid information-rate constraint. Retain this file only as debugging history.
+
 # E3-B budgeted token VIB — pilot result
 
 Implementation: `src/w2c/train_e3b_budget.py`
