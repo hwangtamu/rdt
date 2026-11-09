@@ -40,11 +40,36 @@ def cpu_clone(x):
     return x
 
 
+def resolve_backbone_path(ckpt):
+    """Resolve a checkpoint's backbone path on the current machine.
+
+    E2 checkpoints record the absolute path used when they were trained.  Allow
+    a portable fallback via RDT_MODEL_ROOT or models/<basename> next to the
+    working directory so checkpoints can be reused on another host.
+    """
+    path = ckpt["backbone_path"]
+    if os.path.isdir(path):
+        return path
+    base = os.path.basename(os.path.normpath(path))
+    candidates = []
+    root = os.environ.get("RDT_MODEL_ROOT")
+    if root:
+        candidates.append(os.path.join(root, base))
+    candidates.append(os.path.join("models", base))
+    for cand in candidates:
+        if os.path.isdir(cand):
+            return cand
+    raise FileNotFoundError(
+        f"backbone path {path!r} not found; tried {candidates}; "
+        "set RDT_MODEL_ROOT or copy the model into ./models")
+
+
 def load_backbone(checkpoint, device):
     import torch
     from transformers import AutoModel
     ckpt = torch.load(checkpoint, map_location="cpu", weights_only=False)
-    model = AutoModel.from_pretrained(ckpt["backbone_path"], torch_dtype=torch.float32)
+    model = AutoModel.from_pretrained(resolve_backbone_path(ckpt),
+                                      torch_dtype=torch.float32)
     missing, unexpected = model.load_state_dict(ckpt["model_state"], strict=False)
     if missing:
         raise RuntimeError(f"missing keys: {missing[:5]}")
@@ -59,7 +84,7 @@ def extract_tokens(checkpoint, parts, cfg, device):
     import torch
     model, ckpt = load_backbone(checkpoint, device)
     tokenizer = load_tokenizer({"name": ckpt["backbone_name"],
-                                "path": ckpt["backbone_path"]})
+                                "path": resolve_backbone_path(ckpt)})
     pad_id = tokenizer.pad_token_id
     max_length = int(cfg["max_length"])
     out = {}
@@ -84,10 +109,12 @@ def extract_tokens(checkpoint, parts, cfg, device):
     return out, ckpt
 
 
-def make_batch(tokens, idxs, device):
+def make_batch(tokens, idxs, device, support_length=None):
     import torch
     lengths = [len(tokens[i]) for i in idxs]
-    T = max(lengths)
+    T = int(support_length) if support_length is not None else max(lengths)
+    if T < max(lengths):
+        raise ValueError(f"support_length={T} < max token length {max(lengths)}")
     B = len(idxs)
     h = np.zeros((B, T, tokens[idxs[0]].shape[1]), dtype=np.float32)
     mask = np.zeros((B, T), dtype=np.float32)
@@ -137,16 +164,24 @@ class TokenVIB:
                 "gate": None if self.gate is None else self.gate.state_dict(),
                 "pooling": self.pooling}
 
-    def __call__(self, h, mask, mc=1, sample=True):
-        return self.forward(h, mask, mc=mc, sample=sample)
+    def __call__(self, h, mask, mc=1, sample=True, prior=False):
+        return self.forward(h, mask, mc=mc, sample=sample, prior=prior)
 
-    def forward(self, h, mask, mc=1, sample=True):
+    def forward(self, h, mask, mc=1, sample=True, prior=False):
         import torch
         B, T, D = h.shape
         mu = self.mu(h); logvar = torch.clamp(self.logvar(h), -8.0, 8.0)
-        if sample:
-            eps = torch.randn((mc, B, T, mu.shape[-1]), device=h.device)
+        eps = (torch.randn((mc, B, T, mu.shape[-1]), device=h.device)
+               if (sample or prior) else None)
+        if prior:
+            # Forced-prior zero-rate control: every position, including
+            # padding, is an independent N(0, I) sample.
+            z = eps
+        elif sample:
             z = mu.unsqueeze(0) + eps * torch.exp(0.5 * logvar).unsqueeze(0)
+            if self.pooling == "attention_fixed_support":
+                # Padding must use the prior, not the posterior of a zero h.
+                z = torch.where(mask.unsqueeze(0).unsqueeze(-1).bool(), z, eps)
         else:
             z = mu.unsqueeze(0)
         if self.pooling == "last":
@@ -154,6 +189,12 @@ class TokenVIB:
             pooled = z[:, torch.arange(B, device=h.device), idx]
         elif self.pooling == "mean":
             pooled = (z * mask.unsqueeze(0).unsqueeze(-1)).sum(2) / torch.clamp(mask.sum(1), min=1).unsqueeze(0).unsqueeze(-1)
+        elif self.pooling == "attention_fixed_support":
+            # Fixed support of T positions.  The pool sees no padding mask, so
+            # token length cannot leak through the number of pooled latents.
+            scores = (z @ self.query) / math.sqrt(z.shape[-1])
+            w = torch.softmax(scores, dim=-1)
+            pooled = (w.unsqueeze(-1) * z).sum(dim=2)
         else:
             scores = (z @ self.query) / math.sqrt(z.shape[-1])
             scores = scores.masked_fill(mask.unsqueeze(0).bool() == False,
@@ -166,30 +207,39 @@ class TokenVIB:
                 g = torch.sigmoid(self.gate(torch.cat([z_last, pooled], dim=-1)))
                 pooled = g * z_last + (1.0 - g) * pooled
         logits = self.head(pooled)
-        kl_tok = 0.5 * (mu.pow(2) + logvar.exp() - 1.0 - logvar).sum(-1) / math.log(2)
-        rate = (kl_tok * mask).sum(1)
+        if prior:
+            rate = torch.zeros(B, device=h.device)
+        else:
+            kl_tok = 0.5 * (mu.pow(2) + logvar.exp() - 1.0 - logvar).sum(-1) / math.log(2)
+            rate = (kl_tok * mask).sum(1)
         return logits, rate
 
 
-def evaluate(model, tokens, y, mc, batch, device):
+def evaluate(model, tokens, y, mc, batch, device, prior=False, support_length=None):
     import torch
     model.mu.eval(); model.logvar.eval(); model.head.eval()
     probs = []; ces = []; rates = []
     with torch.no_grad():
         for start in range(0, len(tokens), batch):
             idxs = list(range(start, min(start + batch, len(tokens))))
-            h, mask = make_batch(tokens, idxs, device)
+            h, mask = make_batch(tokens, idxs, device, support_length=support_length)
             yb = torch.tensor(y[idxs], device=device)
-            logits, rate = model(h, mask, mc=mc, sample=True)
+            logits, rate = model(h, mask, mc=mc, sample=True, prior=prior)
             ce = torch.nn.functional.cross_entropy(
                 logits.reshape(-1, 2), yb.unsqueeze(0).expand(logits.shape[0], -1).reshape(-1),
                 reduction="none").view(logits.shape[0], -1).mean(0) / math.log(2)
-            ces.append(ce.mean().item())
+            ces.append(ce.cpu().numpy())
             probs.append(torch.softmax(logits, -1).mean(0).cpu().numpy())
-            rates.append(rate.mean().item())
+            rates.append(rate.cpu().numpy())
     p = np.concatenate(probs, 0)
-    return {"ce_bits": float(np.mean(ces)), "rate_bits": float(np.mean(rates)),
+    ce_all = np.concatenate(ces, 0)
+    rate_all = np.concatenate(rates, 0)
+    return {"ce_bits": float(ce_all.mean()), "rate_bits": float(rate_all.mean()),
             "accuracy": float((p.argmax(1) == y).mean()), "probs": p}
+
+
+def _support_length(cfg):
+    return int(cfg["max_length"]) if str(cfg.get("pooling", "")) == "attention_fixed_support" else None
 
 
 def train_one(tokens, ytr, tokens_v, yv, tokens_te, yte, cfg, seed, beta, device):
@@ -197,17 +247,22 @@ def train_one(tokens, ytr, tokens_v, yv, tokens_te, yte, cfg, seed, beta, device
     set_seed(seed)
     model = TokenVIB(tokens[0].shape[1], int(cfg["latent"]), seed,
                      logvar_init=float(cfg.get("logvar_init", -4.0)),
-                     pooling=str(cfg.get("pooling", "attention"))).to(device)
+                     pooling=str(cfg.get("pooling", "attention")),
+                     identity_init=bool(cfg.get("identity_init", False))).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=float(cfg["lr"]),
                             weight_decay=float(cfg["weight_decay"]))
+    support = _support_length(cfg)
     best = {"val": float("inf"), "state": None, "epoch": -1}
+    history = []
     start_time = time.time()
     for ep in range(int(cfg["epochs"])):
         model.mu.train(); model.logvar.train(); model.head.train()
+        if model.gate is not None:
+            model.gate.train()
         order = list(range(len(tokens))); random.shuffle(order)
         for start in range(0, len(order), int(cfg["batch_size"])):
             idxs = order[start:start + int(cfg["batch_size"])]
-            h, mask = make_batch(tokens, idxs, device)
+            h, mask = make_batch(tokens, idxs, device, support_length=support)
             yb = torch.tensor(ytr[idxs], device=device)
             opt.zero_grad(set_to_none=True)
             logits, rate = model(h, mask, mc=int(cfg["mc_train"]), sample=True)
@@ -217,18 +272,33 @@ def train_one(tokens, ytr, tokens_v, yv, tokens_te, yte, cfg, seed, beta, device
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), float(cfg["grad_clip"]))
             opt.step()
-        val = evaluate(model, tokens_v, yv, int(cfg["mc_eval"]), int(cfg["eval_batch_size"]), device)
-        if val["ce_bits"] < best["val"] - 1e-9:
-            best = {"val": val["ce_bits"], "state": cpu_clone(model.state_dict()), "epoch": ep}
+        val = evaluate(model, tokens_v, yv, int(cfg["mc_eval"]),
+                       int(cfg["eval_batch_size"]), device, support_length=support)
+        score = val["ce_bits"] + beta * val["rate_bits"]
+        history.append({"epoch": ep, "val_ce_bits": val["ce_bits"],
+                        "val_rate_bits": val["rate_bits"],
+                        "val_objective": score})
+        if score < best["val"] - 1e-9:
+            best = {"val": score, "state": cpu_clone(model.state_dict()), "epoch": ep}
         if ep - best["epoch"] >= int(cfg["patience"]):
             break
     model.mu.load_state_dict(best["state"]["mu"]); model.logvar.load_state_dict(best["state"]["logvar"])
     model.head.load_state_dict(best["state"]["head"]); model.query.data = best["state"]["query"].to(device)
-    val = evaluate(model, tokens_v, yv, int(cfg["mc_eval"]), int(cfg["eval_batch_size"]), device)
-    test = evaluate(model, tokens_te, yte, int(cfg["mc_eval"]), int(cfg["eval_batch_size"]), device)
+    if model.gate is not None and best["state"].get("gate") is not None:
+        model.gate.load_state_dict(best["state"]["gate"])
+    val = evaluate(model, tokens_v, yv, int(cfg["mc_eval"]),
+                   int(cfg["eval_batch_size"]), device, support_length=support)
+    test = evaluate(model, tokens_te, yte, int(cfg["mc_eval"]),
+                    int(cfg["eval_batch_size"]), device, support_length=support)
+    prior = evaluate(model, tokens_te, yte, int(cfg["mc_eval"]),
+                     int(cfg["eval_batch_size"]), device, prior=True,
+                     support_length=support)
     return {"best_epoch": best["epoch"], "val_ce": val["ce_bits"],
+            "val_rate": val["rate_bits"], "val_objective": best["val"],
             "test_ce": test["ce_bits"], "test_rate": test["rate_bits"],
-            "test_acc": test["accuracy"], "elapsed": time.time() - start_time,
+            "test_acc": test["accuracy"], "prior_test_ce": prior["ce_bits"],
+            "prior_test_rate": prior["rate_bits"], "prior_test_acc": prior["accuracy"],
+            "history": history, "elapsed": time.time() - start_time,
             "state": best["state"], "model": model}
 
 
@@ -250,6 +320,30 @@ def main(argv=None):
     yv = np.array([r["label"] for r in parts["val"]])
     yte = np.array([r["label"] for r in parts["test"]])
 
+    if bool(cfg.get("standardize", False)):
+        # Train-only global scalar standardization, matching corrected E3-A.
+        total = 0.0
+        total_sq = 0.0
+        count = 0
+        for arr in tokens["train"]:
+            x = arr.astype(np.float64)
+            total += float(x.sum())
+            total_sq += float((x * x).sum())
+            count += int(x.size)
+        mean = total / max(count, 1)
+        var = max(total_sq / max(count, 1) - mean * mean, 0.0)
+        std = math.sqrt(var)
+        if not math.isfinite(std) or std < 1e-12:
+            raise RuntimeError(f"invalid standardization std={std}")
+        for split in ("train", "val", "test"):
+            tokens[split] = [((a.astype(np.float32) - mean) / std).astype(np.float16)
+                             for a in tokens[split]]
+        prep = {"mode": "global_scalar", "mean": mean, "std": std,
+                "count": count}
+        with open(os.path.join(out, "preprocessing.json"), "w", encoding="utf-8") as fh:
+            json.dump(prep, fh, indent=2)
+        print(f"[e3b] standardized tokens mean={mean:.6g} std={std:.6g}")
+
     # Forced prior control.
     pri = np.bincount(ytr, minlength=2).astype(float); pri /= pri.sum()
     prior_ce = float(-np.log2(pri[yte]).mean())
@@ -262,9 +356,16 @@ def main(argv=None):
                           cfg, seed, beta, device)
             rec = {"run_id": run_id, "backbone": args.backbone, "checkpoint": args.checkpoint,
                    "beta": beta, "seed": seed, "latent": int(cfg["latent"]),
+                   "pooling": str(cfg.get("pooling", "attention")),
                    "best_epoch": r["best_epoch"], "val_ce": r["val_ce"],
+                   "val_rate": r["val_rate"], "val_objective": r["val_objective"],
                    "test_ce": r["test_ce"], "test_rate": r["test_rate"],
-                   "test_acc": r["test_acc"], "elapsed_seconds": r["elapsed"],
+                   "test_acc": r["test_acc"],
+                   "prior_test_ce": r["prior_test_ce"],
+                   "prior_test_rate": r["prior_test_rate"],
+                   "prior_test_acc": r["prior_test_acc"],
+                   "history": r["history"],
+                   "elapsed_seconds": r["elapsed"],
                    "prior_ce": prior_ce, "timestamp": now()}
             with open(os.path.join(out, "runs.jsonl"), "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(rec) + "\n")
