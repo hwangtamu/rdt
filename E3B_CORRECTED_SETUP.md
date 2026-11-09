@@ -2,6 +2,14 @@
 
 ## Status and scope
 
+**Revision after the GH200 pilot:** the `last` arm now charges only the latent
+that reaches the classifier. Summing KL over token latents that are immediately
+discarded is a valid but unnecessarily loose upper bound and can create a
+large, architecture-dependent unused-rate term. The distributed
+`attention_fixed_support` arm remains the primary token-level E3-B experiment
+and charges the sum over all transmitted token latents. See
+`E3B_GH200_PILOT_RESULTS.md` for the pilot that motivated this correction.
+
 This document replaces the experimental protocol implicit in
 `E3B_PILOT_RESULTS.md`, `E3B_DIAG_RESULTS.md`, `E3B_BUDGET_RESULTS.md`, and
 `E3B_BUDGET_CURVES.md`. Those files remain useful as a record of diagnostics,
@@ -59,9 +67,9 @@ does not validate the curve. Consequently, the reported 100–3200 bit budget
 curves must not be interpreted as evidence that the decoder has a better
 token-level rate–distortion frontier.
 
-## Primary stochastic channel
+## Stochastic channels and arm-specific rates
 
-The primary E3-B experiment uses no token gate. For each fixed token position
+The corrected E3-B uses no token gate. For each fixed token position
 $t\in\{1,\ldots,T\}$,
 
 $$
@@ -75,8 +83,13 @@ z_t=\mu_\phi(h_t)+\sigma_\phi(h_t)\odot\epsilon_t,
 \qquad \epsilon_t\sim\mathcal N(0,I).
 $$
 
-The measured rate is the exact variational upper bound implemented by this
-channel:
+The measured rate must include exactly the random variables delivered to the
+downstream readout. E3-B therefore has two separate estimands.
+
+### Primary distributed-token arm
+
+`attention_fixed_support` receives every $z_t$. Its rate is the exact
+variational upper bound implemented by that transmitted channel:
 
 $$
 R_{\mathrm{total}}
@@ -92,10 +105,35 @@ contribute exactly zero KL. Total bits/example is the primary rate. Average
 bits/valid-token may be reported as a length diagnostic, but models must never
 be matched on the average while conclusions are stated about total rate.
 
-Do not force the E3-A range of 1–8 bits onto E3-B. A token-level channel has
+### Last-token concentration arm
+
+`last` delivers only $z_\ell$, where $\ell$ is the last valid token index. Its
+rate is therefore
+
+$$
+R_{\mathrm{last}}
+=\frac{1}{\ln 2}\mathbb E_X
+\left[D_{\mathrm{KL}}\left(q_\phi(z_\ell\mid h_\ell)\parallel
+\mathcal N(0,I)\right)\right]
+\quad\text{bits/example}.
+$$
+
+Non-last token posteriors must not be sampled, transmitted, optimized, or
+charged in this arm. For debugging, an implementation may compute their KL
+without gradient, but it must report that quantity as `unused_nonlast_kl` and
+must not add it to $R_{\mathrm{last}}$.
+
+The two rate axes have different meanings and numerical scales. Never merge,
+average, or interpolate the `last` and `attention_fixed_support` curves. The
+last-token arm is a mechanism control for information concentration; the
+fixed-support attention arm is the primary test of distributed token-level
+rate–distortion.
+
+Do not force the E3-A range of 1–8 bits onto either arm. The distributed arm has
 many more latent variables, so its useful overlap may be hundreds or thousands
-of bits/example. The observed shared range, not a preselected numerical range,
-defines the comparison.
+of bits/example. The last-token arm may have a much smaller range. The observed
+shared validation-rate range within each arm, not a preselected numerical
+range, defines the comparison.
 
 ## Preventing a length or mask side channel
 
@@ -124,9 +162,10 @@ that predictions are independent of input and match the train-label prior.
 Readout is a prespecified experimental factor, not an implementation detail.
 Run the following arms separately and never interpolate or average across them:
 
-1. `last`: select the last valid token latent;
-2. `attention_fixed_support`: learned single-query attention over the fixed
-   support described above.
+1. `attention_fixed_support` (**primary**): learned single-query attention over
+   the fixed support described above; charge $R_{\mathrm{total}}$;
+2. `last` (**concentration diagnostic**): select the last valid token latent;
+   charge $R_{\mathrm{last}}$ only.
 
 The `last` arm measures whether decision information has already been
 concentrated at the final token. The attention arm measures the efficiency of a
@@ -134,7 +173,7 @@ distributed token representation. Neither is universally privileged, so both
 must be reported.
 
 Every stochastic curve needs three architecture-matched controls using the
-same readout:
+same token preprocessing and readout:
 
 1. **Raw-token control:** no token projection or noise; train only the specified
    pooling/readout and classifier.
@@ -144,10 +183,19 @@ same readout:
    stochastic CE to recover the deterministic bottleneck within 0.02 bits for
    every included E2 checkpoint and VIB seed.
 
-The forced-prior zero-rate control sets every posterior to the standard prior.
-Its CE must match the train-prior predictor within Monte Carlo error, and its
-predictions must be invariant to shuffled inputs. A learned high-beta model is
-not a substitute for this forced control.
+The forced-prior zero-rate channel sets every transmitted posterior to the
+standard prior. Channel independence and optimal zero-rate distortion are
+different checks:
+
+- verify that transmitted samples are independent of shuffled inputs and
+  lengths under the arm's public-information convention;
+- evaluate $D(0)$ with a separate constant label-prior predictor fitted on the
+  training labels, not with the finite-rate head;
+- report the finite-rate head evaluated on prior samples only as an additional
+  diagnostic.
+
+A learned high-beta model is not a substitute for the forced channel plus the
+constant prior predictor.
 
 ## Feature preprocessing and tokenization
 
@@ -171,13 +219,16 @@ not a substitute for this forced control.
 
 ## Training and checkpoint selection
 
-For beta-sweep runs, optimize in bit units:
+For beta-sweep runs, optimize in bit units using the arm-specific rate:
 
 $$
-\mathcal L = D + \beta R_{\mathrm{total}},
+\mathcal L = D + \beta R_{\mathrm{arm}},
 \qquad
 D=\mathbb E[-\log_2 q_\psi(Y\mid Z_{1:T})].
 $$
+
+Here $Z_{1:T}$ denotes the full fixed-support collection for the attention arm;
+for the last-token arm, replace it with $Z_\ell$.
 
 Required settings:
 
@@ -199,6 +250,26 @@ range, including a forced zero-rate point and a beta = 0 high-rate endpoint.
 Only then run all five E2 seeds. Do not extrapolate outside an individual
 `(E2 seed, VIB seed, readout)` curve.
 
+The first GH200 pilot hit its 20-epoch cap at every finite beta and did not show
+a shared test-rate interval. The next calibration run must use at least 150
+epochs and patience 30, or demonstrate objective convergence earlier. A useful
+starting grid, selected without test CE, is:
+
+| Backbone | Calibration beta grid |
+|---|---|
+| encoder | `0, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 5e-2, 1e-1` |
+| decoder | `0, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2` |
+
+Architecture-specific beta values are allowed because beta is a Lagrange
+multiplier rather than the comparison axis. Keep the number of trials and all
+other search resources comparable. Adapt subsequent grids using validation
+rate and validation objective only.
+
+Before the five-E2-seed expansion, one paired E2 seed with VIB seeds 0–2 must
+provide at least five prespecified shared validation-rate targets per arm, with
+every target bracketed by observed points for both architectures and all three
+VIB seeds.
+
 ## Evaluation and matched-rate analysis
 
 The primary distortion is expected stochastic test CE:
@@ -212,10 +283,13 @@ Mean-only CE is a diagnostic and must not replace the stochastic result.
 For each readout and latent dimension:
 
 1. select checkpoints and construct curves using validation data only;
-2. match encoder and decoder on validation `R_total`;
-3. interpolate per `(E2 seed, VIB seed)` curve only within observed coverage;
-4. apply the same interpolation weights to per-example test CE;
-5. report absolute distortion and compression penalty
+2. remove validation-dominated points; optionally use the validation lower
+   convex envelope when time-sharing is part of the estimand;
+3. match encoder and decoder on validation `R_arm`;
+4. interpolate per `(E2 seed, VIB seed)` curve only between adjacent
+   non-dominated points and only within observed coverage;
+5. apply the same interpolation weights to per-example test CE;
+6. report absolute distortion and compression penalty
 
 $$
 P_m(R)=D_m(R)-D_m^{\mathrm{det}},
@@ -223,7 +297,7 @@ $$
 
 where the deterministic reference uses the same checkpoint, latent dimension,
 and readout path;
-6. estimate paired 95% intervals with a hierarchical bootstrap over paired E2
+7. estimate paired 95% intervals with a hierarchical bootstrap over paired E2
    seeds, VIB seeds nested within E2 seed, and test examples.
 
 Report both
@@ -252,8 +326,10 @@ Each run must save:
 - preprocessing statistics;
 - per-epoch train/validation CE, rate, and objective;
 - complete best-checkpoint state;
-- validation and test total rates;
+- validation and test arm-specific rates;
 - per-example expected and mean-only test CE with ordered IDs;
+- per-example arm-specific rate plus final-token, non-final-token, and total KL
+  diagnostics where applicable;
 - raw beta points and the matched-rate interpolation table.
 
 The analysis script, aggregate CSV files, and generated Markdown report must be
@@ -267,8 +343,9 @@ pass:
 
 1. **Analytic KL test:** the implementation equals the closed-form diagonal
    Gaussian KL, and padding positions contribute zero.
-2. **Sum-not-mean test:** doubling two identical valid token channels doubles
-   total rate.
+2. **Arm-specific rate tests:** doubling two identical valid token channels
+   doubles the attention-arm rate, while changing or duplicating non-last
+   tokens leaves the last-arm rate unchanged.
 3. **Identity-path test:** an identity deterministic bottleneck with matched
    pooling produces the same logits as its raw-token control.
 4. **Checkpoint restoration test:** reloading a saved checkpoint reproduces
@@ -278,7 +355,8 @@ pass:
 6. **High-rate recovery test:** beta = 0 is within 0.02 CE bits of the matched
    deterministic bottleneck for every included seed.
 7. **Rate accounting test:** evaluation rate is example-weighted, independent
-   of evaluation batch partitioning, and reported in bits/example.
+   of evaluation batch partitioning, reported in bits/example, and includes no
+   discarded latent in the last arm.
 8. **Coverage test:** every reported target rate is covered by both
    architectures for all included paired E2/VIB cells; otherwise show the
    reduced cell count and do not call it the primary result.

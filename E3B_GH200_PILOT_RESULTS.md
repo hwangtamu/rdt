@@ -5,6 +5,12 @@ result. The rejected `E3B_BUDGET_*` curves remain rejected. This report records
 the first corrected-code run on the remote GH200 and the protocol gates that
 still fail.
 
+> **Protocol revision:** this pilot charged KL for every valid token even though
+> the `last` readout delivered only the final token latent. The revised
+> `E3B_CORRECTED_SETUP.md` charges only final-token KL in the `last` arm and
+> reserves summed token KL for `attention_fixed_support`. Treat the rates below
+> as legacy total-channel diagnostics, not as the final last-token rate axis.
+
 ## Environment
 
 - Host: `phyvran10prpl02` (`105.165.111.166`), NVIDIA GH200 480GB.
@@ -66,11 +72,15 @@ Expected stochastic test CE in bits; total rate in bits/example.
 
 Observations:
 
-- A shared rate region exists near **400–440 bits/example**, but it is narrow.
+- The displayed test-rate ranges do **not** overlap: the decoder maximum is
+  403.77 bits/example and the encoder minimum is 439.57 bits/example. Validation
+  rates were not committed, so this report does not demonstrate validation-rate
+  overlap either.
 - Every run selected its final epoch (19), so the optimization budget is the
   binding constraint. These points are not converged.
-- The encoder has lower CE at every rate in this small pilot, but the overlap is
-  too narrow and seed coverage too small to support a matched-rate claim.
+- Every encoder point has lower CE than every decoder point, but the encoder
+  points also occur at higher rates. Without a shared validation-rate interval,
+  this does not rank the architectures at matched rate.
 - Epoch histories show total rates starting near 10,000–13,000 bits/example and
   falling throughout training. Extending the run and the beta grid is required
   before interpolation.
@@ -79,25 +89,27 @@ Observations:
 
 Beta = 0, 100-epoch cap, same preprocessing and `last` readout.
 
-| Backbone | Test rate | Stochastic CE | Matched deterministic CE | Gap |
+| Backbone | Test rate | Stochastic CE | Earlier deterministic CE | Nominal gap |
 |---|---:|---:|---:|---:|
 | encoder | 14,122.43 | 0.66896 | 0.633 | +0.036 |
 | decoder | 14,924.52 | 0.81730 | 0.747 | +0.070 |
 
-Training stopped at epoch 3 (encoder) and epoch 10 (decoder) by validation-CE
-patience. Both gaps exceed the required 0.02 bits, so **gate 6 fails** for this
-recipe. The deterministic references are from the earlier E3-B diagnostic and
-were not rerun in this pilot.
+The selected best checkpoints were epochs 3 (encoder) and 10 (decoder); these
+are not necessarily the actual stopping epochs. Both nominal gaps exceed 0.02
+bits, but the deterministic references came from the earlier E3-B diagnostic
+and were not rerun with identical preprocessing. Therefore gate 6 remains
+**unverified/failing**, and the table must not be interpreted as a matched
+high-rate comparison.
 
 ## Forced-prior control
 
 Forced-prior evaluation reports exactly zero measured rate and is invariant to
 input permutation in the synthetic protocol test. However, the expected CE of
 the learned head under forced prior samples is **1.08–1.19 bits**, versus the
-train-prior CE of **0.9568 bits**. Therefore the current forced-prior control
-does **not** satisfy the required label-prior CE match. A prior-only output head
-or a separately fitted label-prior predictor is needed before this gate can
-pass.
+train-prior CE of **0.9568 bits**. This shows that the finite-rate head is not an
+optimal zero-rate decoder; it does not show input leakage from the forced-prior
+channel. The revised protocol defines $D(0)$ using a separate constant
+label-prior predictor and keeps the finite-rate-head result as a diagnostic.
 
 ## Tests
 
@@ -120,25 +132,30 @@ All five passed locally and on the GH200 with the `~/llm` environment.
 | Identity path | pass |
 | Checkpoint restoration | gate-restore code fixed; no end-to-end restore test yet |
 | Zero-rate input independence | pass in synthetic test |
-| Zero-rate label-prior CE | **fail** |
-| High-rate recovery within 0.02 bits | **fail** |
-| Rate accounting | partial: sum test passes; batch-partition test not run |
+| Zero-rate optimal distortion | constant label-prior predictor not implemented |
+| High-rate recovery within 0.02 bits | **unverified/failing** against unmatched controls |
+| Rate accounting | legacy all-token sum passes; last-only and batch-partition tests not run |
 | Coverage across paired seeds | not run |
 | No test-set selection | pass by construction |
 
 ## Next steps
 
-1. Increase the epoch cap/patience and extend beta both below 3e-4 for the
-   decoder and above 3e-2 for the encoder to widen the shared rate region.
-2. Fix high-rate recovery: verify the deterministic control under identical
-   preprocessing, and either initialize/constrain the posterior variance more
-   tightly or train beta = 0 longer with a matched objective.
-3. Implement a true forced-prior label predictor so the zero-rate CE gate is
-   meaningful.
-4. Add the fixed-support attention arm and rerun the beta pilot.
-5. Only then expand to 5 paired E2 seeds × 3 VIB seeds × 2 latent dimensions.
-6. Add the truncation/cache audit and matched-rate interpolation artifacts
-   required by `E3B_CORRECTED_SETUP.md`.
+1. Implement arm-specific rates: final-token KL only for `last`, summed valid
+   token KL only for `attention_fixed_support`.
+2. Integrate raw, deterministic, beta=0, and forced-prior controls into the same
+   preprocessing/evaluation path; save pooling and preprocessing metadata in
+   every checkpoint.
+3. Fit a constant training-label-prior predictor for the zero-rate endpoint.
+4. Increase the epoch cap/patience to at least 150/30 for calibration and use
+   the architecture-specific validation-only beta grids in
+   `E3B_CORRECTED_SETUP.md`.
+5. Save validation rates, per-example CE, IDs, truncation audit, and
+   final/non-final KL decomposition; construct curves from non-dominated
+   validation points only.
+6. Run one paired E2 seed × three VIB seeds for both readout arms. Require at
+   least five fully covered validation-rate targets before expansion.
+7. Only then expand to 5 paired E2 seeds × 3 VIB seeds, with latent 32 primary
+   and latent 128 as a sensitivity analysis.
 
 ## Artifacts
 
