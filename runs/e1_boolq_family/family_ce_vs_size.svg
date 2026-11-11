@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="30" font-family="sans-serif" font-size="18" text-anchor="middle" font-weight="bold">BoolQ: frozen linear/MLP probe CE vs Ettin model size</text>
+<line x1="90" y1="485" x2="865" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="90" y1="55" x2="90" y2="485" stroke="#333" stroke-width="1.5"/>
+<line x1="129.35" y1="485" x2="129.35" y2="491" stroke="#333"/>
+<text x="129.35" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">17</text>
+<line x1="237.44" y1="485" x2="237.44" y2="491" stroke="#333"/>
+<text x="237.44" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">32</text>
+<line x1="363.72" y1="485" x2="363.72" y2="491" stroke="#333"/>
+<text x="363.72" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">67</text>
+<line x1="501.45" y1="485" x2="501.45" y2="491" stroke="#333"/>
+<text x="501.45" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">150</text>
+<line x1="666.92" y1="485" x2="666.92" y2="491" stroke="#333"/>
+<text x="666.92" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">395</text>
+<line x1="825.65" y1="485" x2="825.65" y2="491" stroke="#333"/>
+<text x="825.65" y="507" font-family="sans-serif" font-size="12" text-anchor="middle">1000</text>
+<line x1="84" y1="485.00" x2="90" y2="485.00" stroke="#333"/>
+<text x="80" y="489.00" font-family="sans-serif" font-size="12" text-anchor="end">0.63</text>
+<line x1="84" y1="399.00" x2="90" y2="399.00" stroke="#333"/>
+<text x="80" y="403.00" font-family="sans-serif" font-size="12" text-anchor="end">0.71</text>
+<line x1="84" y1="313.00" x2="90" y2="313.00" stroke="#333"/>
+<text x="80" y="317.00" font-family="sans-serif" font-size="12" text-anchor="end">0.78</text>
+<line x1="84" y1="227.00" x2="90" y2="227.00" stroke="#333"/>
+<text x="80" y="231.00" font-family="sans-serif" font-size="12" text-anchor="end">0.86</text>
+<line x1="84" y1="141.00" x2="90" y2="141.00" stroke="#333"/>
+<text x="80" y="145.00" font-family="sans-serif" font-size="12" text-anchor="end">0.93</text>
+<line x1="84" y1="55.00" x2="90" y2="55.00" stroke="#333"/>
+<text x="80" y="59.00" font-family="sans-serif" font-size="12" text-anchor="end">1.01</text>
+<polyline points="129.35,141.26 237.44,143.88 363.72,146.06 501.45,146.43 666.92,192.95 825.65,320.04" fill="none" stroke="#1f5fbf" stroke-width="2.5"/>
+<circle cx="129.35" cy="141.26" r="4" fill="#1f5fbf"/>
+<circle cx="237.44" cy="143.88" r="4" fill="#1f5fbf"/>
+<circle cx="363.72" cy="146.06" r="4" fill="#1f5fbf"/>
+<circle cx="501.45" cy="146.43" r="4" fill="#1f5fbf"/>
+<circle cx="666.92" cy="192.95" r="4" fill="#1f5fbf"/>
+<circle cx="825.65" cy="320.04" r="4" fill="#1f5fbf"/>
+<polyline points="129.35,151.08 237.44,150.76 363.72,156.33 501.45,160.86 666.92,265.28 825.65,235.47" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<circle cx="129.35" cy="151.08" r="4" fill="#c0392b"/>
+<circle cx="237.44" cy="150.76" r="4" fill="#c0392b"/>
+<circle cx="363.72" cy="156.33" r="4" fill="#c0392b"/>
+<circle cx="501.45" cy="160.86" r="4" fill="#c0392b"/>
+<circle cx="666.92" cy="265.28" r="4" fill="#c0392b"/>
+<circle cx="825.65" cy="235.47" r="4" fill="#c0392b"/>
+<polyline points="129.35,129.54 237.44,150.56 363.72,171.59 501.45,190.24 666.92,214.19 825.65,323.59" fill="none" stroke="#2ca02c" stroke-width="2.5"/>
+<circle cx="129.35" cy="129.54" r="4" fill="#2ca02c"/>
+<circle cx="237.44" cy="150.56" r="4" fill="#2ca02c"/>
+<circle cx="363.72" cy="171.59" r="4" fill="#2ca02c"/>
+<circle cx="501.45" cy="190.24" r="4" fill="#2ca02c"/>
+<circle cx="666.92" cy="214.19" r="4" fill="#2ca02c"/>
+<circle cx="825.65" cy="323.59" r="4" fill="#2ca02c"/>
+<polyline points="129.35,145.89 237.44,137.00 363.72,139.59 501.45,168.48 666.92,253.79 825.65,370.57" fill="none" stroke="#e08a1e" stroke-width="2.5"/>
+<circle cx="129.35" cy="145.89" r="4" fill="#e08a1e"/>
+<circle cx="237.44" cy="137.00" r="4" fill="#e08a1e"/>
+<circle cx="363.72" cy="139.59" r="4" fill="#e08a1e"/>
+<circle cx="501.45" cy="168.48" r="4" fill="#e08a1e"/>
+<circle cx="666.92" cy="253.79" r="4" fill="#e08a1e"/>
+<circle cx="825.65" cy="370.57" r="4" fill="#e08a1e"/>
+<polyline points="129.35,149.90 237.44,175.32 363.72,174.38 501.45,159.13 666.92,220.26 825.65,308.32" fill="none" stroke="#1f5fbf" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="125.35" y="145.90" width="8" height="8" fill="#1f5fbf"/>
+<rect x="233.44" y="171.32" width="8" height="8" fill="#1f5fbf"/>
+<rect x="359.72" y="170.38" width="8" height="8" fill="#1f5fbf"/>
+<rect x="497.45" y="155.13" width="8" height="8" fill="#1f5fbf"/>
+<rect x="662.92" y="216.26" width="8" height="8" fill="#1f5fbf"/>
+<rect x="821.65" y="304.32" width="8" height="8" fill="#1f5fbf"/>
+<polyline points="129.35,138.93 237.44,159.42 363.72,164.43 501.45,178.13 666.92,293.37 825.65,309.72" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="125.35" y="134.93" width="8" height="8" fill="#c0392b"/>
+<rect x="233.44" y="155.42" width="8" height="8" fill="#c0392b"/>
+<rect x="359.72" y="160.43" width="8" height="8" fill="#c0392b"/>
+<rect x="497.45" y="174.13" width="8" height="8" fill="#c0392b"/>
+<rect x="662.92" y="289.37" width="8" height="8" fill="#c0392b"/>
+<rect x="821.65" y="305.72" width="8" height="8" fill="#c0392b"/>
+<polyline points="129.35,139.15 237.44,162.62 363.72,173.05 501.45,203.19 666.92,261.25 825.65,352.57" fill="none" stroke="#2ca02c" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="125.35" y="135.15" width="8" height="8" fill="#2ca02c"/>
+<rect x="233.44" y="158.62" width="8" height="8" fill="#2ca02c"/>
+<rect x="359.72" y="169.05" width="8" height="8" fill="#2ca02c"/>
+<rect x="497.45" y="199.19" width="8" height="8" fill="#2ca02c"/>
+<rect x="662.92" y="257.25" width="8" height="8" fill="#2ca02c"/>
+<rect x="821.65" y="348.57" width="8" height="8" fill="#2ca02c"/>
+<polyline points="129.35,174.23 237.44,104.62 363.72,165.50 501.45,206.42 666.92,287.35 825.65,435.38" fill="none" stroke="#e08a1e" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="125.35" y="170.23" width="8" height="8" fill="#e08a1e"/>
+<rect x="233.44" y="100.62" width="8" height="8" fill="#e08a1e"/>
+<rect x="359.72" y="161.50" width="8" height="8" fill="#e08a1e"/>
+<rect x="497.45" y="202.42" width="8" height="8" fill="#e08a1e"/>
+<rect x="662.92" y="283.35" width="8" height="8" fill="#e08a1e"/>
+<rect x="821.65" y="431.38" width="8" height="8" fill="#e08a1e"/>
+<line x1="655" y1="65" x2="683" y2="65" stroke="#1f5fbf" stroke-width="2.5"/>
+<circle cx="669" cy="65" r="3.5" fill="#1f5fbf"/>
+<text x="691" y="69" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder (scratch)</text>
+<line x1="655" y1="86" x2="683" y2="86" stroke="#c0392b" stroke-width="2.5"/>
+<circle cx="669" cy="86" r="3.5" fill="#c0392b"/>
+<text x="691" y="90" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder (scratch)</text>
+<line x1="655" y1="107" x2="683" y2="107" stroke="#2ca02c" stroke-width="2.5"/>
+<circle cx="669" cy="107" r="3.5" fill="#2ca02c"/>
+<text x="691" y="111" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">encoder<-decoder</text>
+<line x1="655" y1="128" x2="683" y2="128" stroke="#e08a1e" stroke-width="2.5"/>
+<circle cx="669" cy="128" r="3.5" fill="#e08a1e"/>
+<text x="691" y="132" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">decoder<-encoder</text>
+<line x1="655" y1="149" x2="683" y2="149" stroke="#555" stroke-width="2.5"/>
+<circle cx="669" cy="149" r="3.5" fill="#555"/>
+<text x="691" y="153" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">solid = linear probe</text>
+<line x1="655" y1="170" x2="683" y2="170" stroke="#555" stroke-width="2.5" stroke-dasharray="6,4"/>
+<rect x="665.5" y="166.5" width="7" height="7" fill="#555"/>
+<text x="691" y="174" font-family="sans-serif" font-size="12" text-anchor="start" fill="#222" font-weight="normal">dashed = MLP probe</text>
+<text x="450.0" y="540" font-family="sans-serif" font-size="14" text-anchor="middle">parameters (millions, log scale)</text>
+<text x="22" y="280.0" font-family="sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 22 280.0)">test CE (bits), validation-selected layer</text>
+</svg>
